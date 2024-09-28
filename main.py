@@ -1,3 +1,5 @@
+import sys
+
 def calculate(stairs: int) -> int:
     if stairs == 0:
         return 0
@@ -17,8 +19,11 @@ def calculate(stairs: int) -> int:
     return current
 
 def main():
+    default_int_max_str_digits = sys.get_int_max_str_digits()
+    sys.set_int_max_str_digits(0)
     for test_case in range(int(input())):
         print(calculate(int(input())+1))
+    sys.set_int_max_str_digits(default_int_max_str_digits)
 
 if __name__ == '__main__':
     main()
