@@ -1,18 +1,22 @@
-cache = {}
-
 def calculate(stairs: int) -> int:
-    if stairs in cache:
-        return cache[stairs]
     if stairs == 0:
         return 0
     if stairs == 1 or stairs == 2:
         return 1
-    return calculate(stairs - 1) + calculate(stairs - 2)
+
+    previous_min_1 = 0
+    previous_min_2 = 1
+
+    current = previous_min_1 + previous_min_2
+
+    for i in range(3, stairs + 1):
+        previous_min_1 = previous_min_2
+        previous_min_2 = current
+        current = previous_min_1 + previous_min_2
+
+    return current
 
 def main():
-    cases_to_cache = range(1, 20)
-    for case_to_cache in cases_to_cache:
-        cache[case_to_cache] = calculate(case_to_cache)
     for test_case in range(int(input())):
         print(calculate(int(input())+1))
 
